@@ -1,32 +1,33 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>RAHSMI — Secret Knowledge Room</title>
+<title>Mysterious — Secret Knowledge Room</title>
 
 <style>
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
-html,
-body{
+html,body{
     width:100%;
-    height:100%;
-    overflow:hidden;
-    font-family:Arial, Helvetica, sans-serif;
+    min-height:100%;
+    font-family:Arial,Helvetica,sans-serif;
     background:#020305;
     color:white;
 }
 
-/* ==============================
-   MAIN SECRET SCREEN
-============================== */
+body{
+    overflow-x:hidden;
+}
+
+/* =====================================
+   INTRO SCREEN
+===================================== */
 
 #introScreen{
     position:fixed;
@@ -35,11 +36,16 @@ body{
     justify-content:center;
     align-items:center;
     overflow:hidden;
+
     background:
-        radial-gradient(circle at center,
-        rgba(100,100,120,.12),
-        transparent 35%),
+        radial-gradient(
+            circle at center,
+            rgba(120,120,140,.14),
+            transparent 35%
+        ),
         #020305;
+
+    z-index:10;
 }
 
 /* Stars */
@@ -47,68 +53,96 @@ body{
 .stars{
     position:absolute;
     inset:0;
+
     background-image:
-        radial-gradient(circle,rgba(255,255,255,.7) 1px,transparent 1px),
-        radial-gradient(circle,rgba(255,255,255,.4) 1px,transparent 1px);
-    background-size:80px 80px,130px 130px;
-    opacity:.25;
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.7) 1px,
+            transparent 1px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.4) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        80px 80px,
+        130px 130px;
+
+    opacity:.3;
 }
 
-/* ==============================
+/* =====================================
    FOG
-============================== */
+===================================== */
 
 .fog{
     position:absolute;
+
     width:800px;
     height:400px;
+
     border-radius:50%;
+
     background:
         radial-gradient(
             ellipse,
-            rgba(190,200,210,.20),
+            rgba(210,215,220,.20),
             rgba(100,110,120,.08),
             transparent 70%
         );
-    filter:blur(35px);
-    animation:fogMove 8s infinite alternate ease-in-out;
+
+    filter:blur(40px);
+
+    animation:
+        fogMove 9s infinite alternate ease-in-out;
+
     opacity:.7;
 }
 
 .fog.one{
-    top:10%;
-    left:-15%;
+    top:5%;
+    left:-20%;
 }
 
 .fog.two{
-    bottom:5%;
-    right:-15%;
+    bottom:0;
+    right:-20%;
     animation-delay:2s;
+}
+
+.fog.three{
+    top:45%;
+    left:20%;
+    width:600px;
+    height:250px;
+    opacity:.3;
+    animation-delay:4s;
 }
 
 @keyframes fogMove{
 
-    from{
-        transform:translateX(-80px) scale(1);
+    0%{
+        transform:translate(-100px,0) scale(1);
     }
 
-    to{
-        transform:translateX(120px) scale(1.25);
+    100%{
+        transform:translate(150px,-40px) scale(1.3);
     }
-
 }
 
-/* ==============================
-   Mysterious BUTTON
-============================== */
+/* =====================================
+   MAIN BUTTON
+===================================== */
 
 .secretButton{
 
     position:relative;
-    z-index:10;
+    z-index:20;
 
-    width:190px;
-    height:190px;
+    width:200px;
+    height:200px;
 
     border-radius:50%;
 
@@ -116,25 +150,41 @@ body{
 
     background:
         radial-gradient(
-            circle at 35% 30%,
-            #777,
-            #25272b 35%,
-            #08090b 70%
+            circle at 35% 28%,
+            #888,
+            #292b30 35%,
+            #070809 72%
         );
 
     color:white;
 
-    font-size:27px;
-    font-weight:bold;
-    letter-spacing:5px;
-
     cursor:pointer;
 
+    font-size:27px;
+    font-weight:bold;
+
+    letter-spacing:6px;
+
     box-shadow:
-        0 0 25px rgba(255,255,255,.12),
+        0 0 30px rgba(255,255,255,.12),
         inset 0 0 35px rgba(255,255,255,.08);
 
-    transition:.4s;
+    transition:
+        transform .4s,
+        box-shadow .4s;
+}
+
+.secretButton:hover{
+
+    transform:scale(1.07);
+
+    box-shadow:
+        0 0 50px rgba(255,255,255,.22),
+        inset 0 0 45px rgba(255,255,255,.12);
+}
+
+.secretButton:active{
+    transform:scale(.95);
 }
 
 .secretButton::before{
@@ -147,7 +197,7 @@ body{
 
     border-radius:50%;
 
-    border:1px solid rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.15);
 
     animation:pulse 2.5s infinite;
 }
@@ -158,22 +208,29 @@ body{
 
     position:absolute;
 
-    inset:-35px;
+    inset:-40px;
 
     border-radius:50%;
 
     border:1px solid rgba(255,255,255,.05);
-
 }
 
-.secretButton:hover{
+.buttonText{
+    position:relative;
+    z-index:2;
+}
 
-    transform:scale(1.06);
+.buttonSub{
 
-    box-shadow:
-        0 0 40px rgba(255,255,255,.22),
-        inset 0 0 40px rgba(255,255,255,.12);
+    display:block;
 
+    margin-top:10px;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    opacity:.5;
 }
 
 @keyframes pulse{
@@ -184,30 +241,14 @@ body{
     }
 
     100%{
-        transform:scale(1.2);
+        transform:scale(1.25);
         opacity:0;
     }
-
 }
 
-/* Button Text */
-
-.buttonText{
-    position:relative;
-    z-index:2;
-}
-
-.buttonSub{
-    display:block;
-    font-size:10px;
-    letter-spacing:3px;
-    margin-top:8px;
-    opacity:.55;
-}
-
-/* ==============================
-   SECRET DOOR
-============================== */
+/* =====================================
+   DOOR SCENE
+===================================== */
 
 #doorScene{
 
@@ -222,32 +263,68 @@ body{
     background:
         radial-gradient(
             ellipse at center,
-            #34343a 0%,
-            #111216 35%,
-            #020305 75%
+            #303138,
+            #111216 40%,
+            #020305 78%
         );
 
-    z-index:50;
+    z-index:30;
 
+    overflow:hidden;
 }
+
+/* Extra fog inside door scene */
+
+.doorFog{
+
+    position:absolute;
+
+    width:900px;
+    height:500px;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255,255,255,.16),
+            transparent 70%
+        );
+
+    filter:blur(45px);
+
+    animation:doorFogMove 7s infinite alternate;
+}
+
+@keyframes doorFogMove{
+
+    from{
+        transform:translateX(-120px);
+    }
+
+    to{
+        transform:translateX(120px);
+    }
+}
+
+/* Door frame */
 
 .doorFrame{
 
     position:relative;
 
-    width:min(380px,75vw);
-    height:min(560px,82vh);
+    width:min(390px,76vw);
+    height:min(570px,82vh);
 
     border:8px solid #292a2f;
 
-    background:#050507;
+    background:#030304;
 
     box-shadow:
-        0 0 30px rgba(255,255,255,.08),
-        inset 0 0 40px #000;
+        0 0 35px rgba(255,255,255,.08),
+        inset 0 0 50px #000;
 
     overflow:hidden;
 
+    z-index:2;
 }
 
 /* Light behind door */
@@ -255,20 +332,19 @@ body{
 .doorLight{
 
     position:absolute;
-
     inset:0;
 
     background:
         radial-gradient(
             ellipse at center,
-            rgba(255,255,255,.85),
-            rgba(130,130,140,.25),
+            rgba(255,255,255,.9),
+            rgba(160,160,170,.35),
             transparent 70%
         );
 
     opacity:0;
 
-    transition:2s;
+    transition:2.5s;
 }
 
 /* Door */
@@ -276,26 +352,24 @@ body{
 .door{
 
     position:absolute;
-
     inset:0;
 
     background:
-
         linear-gradient(
             90deg,
-            #08090a,
-            #202126,
-            #0b0c0e
+            #070809,
+            #25262b,
+            #0a0b0d
         );
 
     border:3px solid #55565b;
 
     transform-origin:left center;
 
-    transition:3s cubic-bezier(.77,0,.18,1);
+    transition:
+        transform 3s cubic-bezier(.77,0,.18,1);
 
-    z-index:3;
-
+    z-index:5;
 }
 
 .door::before{
@@ -303,8 +377,7 @@ body{
     content:"";
 
     position:absolute;
-
-    inset:20px;
+    inset:22px;
 
     border:1px solid rgba(255,255,255,.15);
 
@@ -312,22 +385,23 @@ body{
 
 .door::after{
 
-    content:"RAHSMI";
+    content:"MYSTERIOUS";
 
     position:absolute;
 
     top:50%;
-
     left:50%;
 
-    transform:translate(-50%,-50%);
+    transform:
+        translate(-50%,-50%);
 
-    font-size:30px;
+    font-size:25px;
 
-    letter-spacing:8px;
+    letter-spacing:6px;
 
-    color:rgba(255,255,255,.55);
+    color:rgba(255,255,255,.45);
 
+    white-space:nowrap;
 }
 
 .doorHandle{
@@ -335,48 +409,44 @@ body{
     position:absolute;
 
     right:28px;
-
     top:50%;
 
-    width:15px;
-
-    height:15px;
+    width:16px;
+    height:16px;
 
     border-radius:50%;
 
     background:#aaa;
 
-    box-shadow:0 0 12px rgba(255,255,255,.4);
-
+    box-shadow:
+        0 0 14px rgba(255,255,255,.5);
 }
 
-/* Open Door */
+/* Door opens */
 
 #doorScene.open .door{
 
-    transform:perspective(1200px) rotateY(-105deg);
-
+    transform:
+        perspective(1200px)
+        rotateY(-105deg);
 }
 
 #doorScene.open .doorLight{
-
     opacity:1;
 }
 
-/* ==============================
-   WELCOME SCREEN
-============================== */
+/* =====================================
+   WELCOME
+===================================== */
 
 #welcome{
 
     position:fixed;
-
     inset:0;
 
     display:none;
 
     justify-content:center;
-
     align-items:center;
 
     text-align:center;
@@ -387,80 +457,77 @@ body{
         radial-gradient(
             circle at center,
             #1c1d22,
-            #020305 65%
+            #020305 68%
         );
 
-    z-index:80;
-
+    z-index:50;
 }
 
 .welcomeBox{
 
-    max-width:800px;
+    width:min(850px,95vw);
 
-    animation:welcomeIn 2s ease;
-
+    animation:
+        welcomeIn 1.8s ease;
 }
 
 @keyframes welcomeIn{
 
     from{
         opacity:0;
-        transform:translateY(30px);
+        transform:translateY(35px) scale(.97);
     }
 
     to{
         opacity:1;
-        transform:translateY(0);
+        transform:translateY(0) scale(1);
     }
-
 }
 
 .welcomeSmall{
 
-    font-size:13px;
+    font-size:12px;
 
     letter-spacing:5px;
 
-    opacity:.5;
+    opacity:.45;
 
     margin-bottom:25px;
-
 }
 
 .welcomeTitle{
 
-    font-size:clamp(30px,6vw,65px);
+    font-size:
+        clamp(35px,7vw,75px);
 
-    letter-spacing:8px;
+    letter-spacing:10px;
 
     margin-bottom:25px;
 
+    text-shadow:
+        0 0 25px rgba(255,255,255,.15);
 }
 
 .welcomeText{
 
-    font-size:clamp(17px,2.5vw,24px);
+    font-size:
+        clamp(16px,2.5vw,23px);
 
     line-height:1.8;
 
-    color:#d5d5d5;
-
+    color:#d8d8d8;
 }
-
-/* ==============================
-   ENTER BUTTON
-============================== */
 
 .enterButton{
 
-    margin-top:35px;
+    margin-top:38px;
 
-    padding:15px 40px;
+    padding:16px 32px;
 
-    border:1px solid rgba(255,255,255,.35);
+    border:1px solid rgba(255,255,255,.3);
 
-    background:rgba(255,255,255,.05);
+    background:
+        rgba(255,255,255,.05);
 
     color:white;
 
@@ -468,10 +535,9 @@ body{
 
     cursor:pointer;
 
-    letter-spacing:3px;
+    letter-spacing:2px;
 
     transition:.3s;
-
 }
 
 .enterButton:hover{
@@ -480,32 +546,32 @@ body{
 
     color:#050505;
 
+    transform:scale(1.04);
 }
 
-/* ==============================
-   SECRET ROOM
-============================== */
+/* =====================================
+   SECRET KNOWLEDGE ROOM
+===================================== */
 
 #secretRoom{
 
     position:fixed;
-
     inset:0;
 
     display:none;
 
-    overflow:auto;
+    overflow-y:auto;
 
     background:
 
         radial-gradient(
-            circle at 50% 20%,
-            rgba(100,100,120,.16),
-            transparent 30%
+            circle at 50% 15%,
+            rgba(120,120,140,.16),
+            transparent 32%
         ),
 
         radial-gradient(
-            circle at 20% 80%,
+            circle at 15% 80%,
             rgba(255,255,255,.04),
             transparent 25%
         ),
@@ -513,44 +579,46 @@ body{
         #030406;
 
     z-index:100;
-
 }
 
 /* Header */
 
 .roomHeader{
 
-    padding:25px;
+    padding:
+        28px 20px 10px;
 
     text-align:center;
-
 }
 
 .roomLogo{
 
-    font-size:28px;
+    font-size:30px;
 
-    letter-spacing:8px;
+    letter-spacing:9px;
 
+    text-shadow:
+        0 0 20px rgba(255,255,255,.12);
 }
 
 .roomSubtitle{
 
-    margin-top:8px;
+    margin-top:9px;
 
-    font-size:11px;
+    font-size:10px;
 
     letter-spacing:4px;
 
     opacity:.4;
-
 }
 
-/* Search */
+/* =====================================
+   SEARCH AREA
+===================================== */
 
 .searchArea{
 
-    min-height:65vh;
+    min-height:70vh;
 
     display:flex;
 
@@ -560,93 +628,100 @@ body{
 
     align-items:center;
 
-    padding:30px;
-
+    padding:30px 20px;
 }
 
 .searchTitle{
 
-    font-size:clamp(30px,6vw,65px);
+    font-size:
+        clamp(32px,6vw,68px);
 
     letter-spacing:5px;
 
     text-align:center;
 
-    margin-bottom:12px;
-
+    margin-bottom:14px;
 }
 
 .searchDescription{
 
-    opacity:.5;
+    color:#999;
 
     margin-bottom:40px;
 
     text-align:center;
-
 }
+
+/* Search Box */
 
 .searchBox{
 
-    width:min(800px,95vw);
+    width:min(850px,96vw);
 
     position:relative;
-
 }
 
 .searchInput{
 
     width:100%;
 
-    height:70px;
+    height:72px;
 
     border-radius:40px;
 
-    border:1px solid rgba(255,255,255,.2);
+    border:
+        1px solid rgba(255,255,255,.2);
 
-    background:rgba(255,255,255,.04);
+    background:
+        rgba(255,255,255,.045);
 
     color:white;
 
     outline:none;
 
-    padding:0 150px 0 30px;
+    padding:
+        0 155px 0 30px;
 
-    font-size:18px;
+    font-size:17px;
 
-    backdrop-filter:blur(15px);
+    backdrop-filter:blur(18px);
 
     box-shadow:
+        0 0 40px rgba(255,255,255,.035),
+        inset 0 0 25px rgba(255,255,255,.02);
+}
 
-        0 0 40px rgba(255,255,255,.04),
-
-        inset 0 0 20px rgba(255,255,255,.02);
-
+.searchInput::placeholder{
+    color:#777;
 }
 
 .searchInput:focus{
 
-    border-color:rgba(255,255,255,.5);
+    border-color:
+        rgba(255,255,255,.5);
 
+    box-shadow:
+        0 0 35px rgba(255,255,255,.08);
 }
+
+/* Search Button */
 
 .searchButton{
 
     position:absolute;
 
     right:7px;
-
     top:7px;
 
-    height:56px;
+    height:58px;
 
-    padding:0 28px;
+    padding:0 25px;
 
     border:0;
 
     border-radius:30px;
 
-    background:#f2f2f2;
+    background:#f1f1f1;
 
     color:#050505;
 
@@ -654,15 +729,21 @@ body{
 
     cursor:pointer;
 
+    transition:.3s;
 }
+
+.searchButton:hover{
+    transform:scale(1.03);
+}
+
+/* Voice */
 
 .voiceButton{
 
     position:absolute;
 
     right:105px;
-
-    top:18px;
+    top:20px;
 
     border:0;
 
@@ -670,13 +751,14 @@ body{
 
     color:white;
 
-    font-size:24px;
+    font-size:23px;
 
     cursor:pointer;
-
 }
 
-/* Categories */
+/* =====================================
+   CATEGORIES
+===================================== */
 
 .categories{
 
@@ -688,60 +770,69 @@ body{
 
     gap:12px;
 
-    margin-top:35px;
+    margin-top:32px;
 
     max-width:900px;
-
 }
 
 .category{
 
-    padding:10px 17px;
+    padding:
+        11px 18px;
 
-    border:1px solid rgba(255,255,255,.12);
+    border:
+        1px solid rgba(255,255,255,.12);
 
     border-radius:30px;
 
-    background:rgba(255,255,255,.03);
+    background:
+        rgba(255,255,255,.03);
 
     cursor:pointer;
 
     font-size:13px;
 
     transition:.3s;
-
 }
 
 .category:hover{
 
-    background:rgba(255,255,255,.1);
+    background:
+        rgba(255,255,255,.1);
 
+    transform:translateY(-2px);
 }
 
-/* Results */
+/* =====================================
+   RESULT
+===================================== */
 
 #resultArea{
 
     width:min(900px,94vw);
 
-    margin:0 auto 50px;
+    margin:
+        0 auto 60px;
 
     display:none;
-
 }
 
 .resultBox{
 
-    padding:30px;
+    padding:32px;
 
-    border:1px solid rgba(255,255,255,.12);
+    border:
+        1px solid rgba(255,255,255,.12);
 
     border-radius:25px;
 
-    background:rgba(255,255,255,.035);
+    background:
+        rgba(255,255,255,.035);
 
-    backdrop-filter:blur(15px);
+    backdrop-filter:blur(18px);
 
+    box-shadow:
+        0 10px 50px rgba(0,0,0,.25);
 }
 
 .resultTitle{
@@ -750,90 +841,141 @@ body{
 
     margin-bottom:20px;
 
+    letter-spacing:2px;
 }
 
 .resultText{
 
-    line-height:1.8;
+    line-height:1.85;
 
-    color:#d5d5d5;
+    color:#d2d2d2;
 
     white-space:pre-wrap;
-
 }
 
-/* Back */
+/* =====================================
+   EXIT
+===================================== */
 
 .backButton{
 
     position:fixed;
 
     bottom:20px;
-
     left:20px;
 
-    border:1px solid rgba(255,255,255,.15);
+    border:
+        1px solid rgba(255,255,255,.15);
 
-    background:rgba(255,255,255,.05);
+    background:
+        rgba(255,255,255,.05);
 
     color:white;
 
-    padding:10px 18px;
+    padding:
+        10px 18px;
 
     border-radius:20px;
 
     cursor:pointer;
 
     z-index:200;
-
 }
 
-/* Mobile */
+/* =====================================
+   LOADING
+===================================== */
+
+.loading{
+
+    display:inline-block;
+
+    width:10px;
+    height:10px;
+
+    border:
+        2px solid rgba(255,255,255,.3);
+
+    border-top-color:white;
+
+    border-radius:50%;
+
+    animation:
+        spin .8s linear infinite;
+}
+
+@keyframes spin{
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* =====================================
+   MOBILE
+===================================== */
 
 @media(max-width:600px){
 
     .secretButton{
 
-        width:155px;
-        height:155px;
-        font-size:22px;
+        width:160px;
+        height:160px;
 
+        font-size:21px;
+
+        letter-spacing:4px;
+    }
+
+    .doorFrame{
+
+        width:75vw;
+        height:78vh;
+    }
+
+    .door::after{
+
+        font-size:17px;
+
+        letter-spacing:4px;
     }
 
     .searchInput{
 
-        height:60px;
+        height:62px;
 
-        padding-right:110px;
+        padding:
+            0 112px 0 22px;
 
-        font-size:15px;
-
+        font-size:14px;
     }
 
     .searchButton{
 
-        height:46px;
+        height:48px;
 
-        top:7px;
-
-        padding:0 18px;
-
+        padding:
+            0 18px;
     }
 
     .voiceButton{
 
         right:75px;
 
-        top:15px;
-
+        top:17px;
     }
 
     .welcomeText{
 
         font-size:16px;
 
+        line-height:1.7;
     }
 
+    .roomLogo{
+
+        font-size:24px;
+    }
 }
 
 </style>
@@ -841,9 +983,9 @@ body{
 
 <body>
 
-<!-- =================================
+<!-- =====================================
      INTRO
-================================= -->
+===================================== -->
 
 <section id="introScreen">
 
@@ -851,15 +993,18 @@ body{
 
     <div class="fog one"></div>
     <div class="fog two"></div>
+    <div class="fog three"></div>
 
-    <button class="secretButton" onclick="activateRahsmi()">
+    <button
+        class="secretButton"
+        onclick="activateMysterious()">
 
         <span class="buttonText">
 
-            RAHSMI
+            MYSTERIOUS
 
             <span class="buttonSub">
-                ENTER SECRET
+                ENTER THE UNKNOWN
             </span>
 
         </span>
@@ -869,11 +1014,13 @@ body{
 </section>
 
 
-<!-- =================================
+<!-- =====================================
      SECRET DOOR
-================================= -->
+===================================== -->
 
 <section id="doorScene">
+
+    <div class="doorFog"></div>
 
     <div class="doorFrame">
 
@@ -890,9 +1037,9 @@ body{
 </section>
 
 
-<!-- =================================
+<!-- =====================================
      WELCOME
-================================= -->
+===================================== -->
 
 <section id="welcome">
 
@@ -903,7 +1050,7 @@ body{
         </div>
 
         <div class="welcomeTitle">
-            Mysterious
+            MYSTERIOUS
         </div>
 
         <div class="welcomeText">
@@ -920,8 +1067,12 @@ body{
 
         </div>
 
-        <button class="enterButton" onclick="enterRoom()">
+        <button
+            class="enterButton"
+            onclick="enterKnowledgeRoom()">
+
             ENTER THE KNOWLEDGE ROOM
+
         </button>
 
     </div>
@@ -929,16 +1080,16 @@ body{
 </section>
 
 
-<!-- =================================
-     SECRET KNOWLEDGE ROOM
-================================= -->
+<!-- =====================================
+     KNOWLEDGE ROOM
+===================================== -->
 
 <section id="secretRoom">
 
     <header class="roomHeader">
 
         <div class="roomLogo">
-            Mysterious
+            MYSTERIOUS
         </div>
 
         <div class="roomSubtitle">
@@ -965,21 +1116,29 @@ body{
                 id="searchInput"
                 class="searchInput"
                 type="text"
-                placeholder="आप क्या जानना चाहते हैं?"
-                onkeydown="if(event.key==='Enter') searchRahsmi()"
+                placeholder="What do you want to know?"
+                onkeydown="
+                    if(event.key==='Enter'){
+                        searchMysterious();
+                    }
+                "
             >
 
             <button
                 class="voiceButton"
                 onclick="voiceSearch()"
                 title="Voice Search">
+
                 🎤
+
             </button>
 
             <button
                 class="searchButton"
-                onclick="searchRahsmi()">
+                onclick="searchMysterious()">
+
                 SEARCH
+
             </button>
 
         </div>
@@ -987,28 +1146,52 @@ body{
 
         <div class="categories">
 
-            <div class="category" onclick="setSearch('भारत का इतिहास')">
+            <div
+                class="category"
+                onclick="setSearch('भारत का इतिहास')">
+
                 🇮🇳 History
+
             </div>
 
-            <div class="category" onclick="setSearch('Science क्या है?')">
+            <div
+                class="category"
+                onclick="setSearch('Science क्या है?')">
+
                 🔬 Science
+
             </div>
 
-            <div class="category" onclick="setSearch('Artificial Intelligence')">
+            <div
+                class="category"
+                onclick="setSearch('Artificial Intelligence')">
+
                 🤖 AI
+
             </div>
 
-            <div class="category" onclick="setSearch('दुनिया के देशों की जानकारी')">
+            <div
+                class="category"
+                onclick="setSearch('दुनिया के देशों की जानकारी')">
+
                 🌍 World
+
             </div>
 
-            <div class="category" onclick="setSearch('Technology की जानकारी')">
+            <div
+                class="category"
+                onclick="setSearch('Technology की जानकारी')">
+
                 💻 Technology
+
             </div>
 
-            <div class="category" onclick="setSearch('General Knowledge')">
+            <div
+                class="category"
+                onclick="setSearch('General Knowledge')">
+
                 🧠 Knowledge
+
             </div>
 
         </div>
@@ -1016,12 +1199,14 @@ body{
     </main>
 
 
+    <!-- RESULT -->
+
     <div id="resultArea">
 
         <div class="resultBox">
 
             <div class="resultTitle">
-                🔮  Mysterious RESULT
+                🔮 MYSTERIOUS RESULT
             </div>
 
             <div
@@ -1036,8 +1221,10 @@ body{
 
     <button
         class="backButton"
-        onclick="goBack()">
+        onclick="exitMysterious()">
+
         ← Exit
+
     </button>
 
 </section>
@@ -1045,9 +1232,9 @@ body{
 
 <script>
 
-/* =================================
+/* =====================================
    VOICE
-================================= */
+===================================== */
 
 function speak(text){
 
@@ -1062,22 +1249,21 @@ function speak(text){
 
     voice.lang = "hi-IN";
 
-    voice.rate = 0.9;
+    voice.rate = .9;
 
-    voice.pitch = 0.9;
+    voice.pitch = .9;
 
     voice.volume = 1;
 
     window.speechSynthesis.speak(voice);
-
 }
 
 
-/* =================================
-   ACTIVATE RAHSMI
-================================= */
+/* =====================================
+   START MYSTERIOUS
+===================================== */
 
-function activateRahsmi(){
+function activateMysterious(){
 
     const intro =
         document.getElementById("introScreen");
@@ -1089,13 +1275,14 @@ function activateRahsmi(){
 
     door.style.display = "flex";
 
-    setTimeout(()=>{
+    setTimeout(function(){
 
         door.classList.add("open");
 
     },300);
 
-    setTimeout(()=>{
+
+    setTimeout(function(){
 
         door.style.display = "none";
 
@@ -1106,9 +1293,9 @@ function activateRahsmi(){
 }
 
 
-/* =================================
+/* =====================================
    WELCOME
-================================= */
+===================================== */
 
 function showWelcome(){
 
@@ -1120,7 +1307,7 @@ function showWelcome(){
     const message =
         "Secret Room में आपका स्वागत है। आप एक ऐसी दुनिया में आ चुके हैं, जहाँ आपको वह हर ज्ञान मिलेगा जो आप चाहते हैं। तो क्या आप तैयार हैं? Welcome to your Secret World.";
 
-    setTimeout(()=>{
+    setTimeout(function(){
 
         speak(message);
 
@@ -1129,11 +1316,11 @@ function showWelcome(){
 }
 
 
-/* =================================
-   ENTER ROOM
-================================= */
+/* =====================================
+   KNOWLEDGE ROOM
+===================================== */
 
-function enterRoom(){
+function enterKnowledgeRoom(){
 
     document.getElementById("welcome")
         .style.display = "none";
@@ -1141,14 +1328,21 @@ function enterRoom(){
     document.getElementById("secretRoom")
         .style.display = "block";
 
+    setTimeout(function(){
+
+        document.getElementById("searchInput")
+            .focus();
+
+    },300);
+
 }
 
 
-/* =================================
+/* =====================================
    SEARCH
-================================= */
+===================================== */
 
-function searchRahsmi(){
+function searchMysterious(){
 
     const input =
         document.getElementById("searchInput");
@@ -1173,16 +1367,19 @@ function searchRahsmi(){
     resultArea.style.display = "block";
 
     resultText.innerHTML =
-        "आपने पूछा: " +
-        "<b>" +
+        "आपने पूछा:\n\n" +
+
+        "“" +
         escapeHTML(query) +
-        "</b>\n\n" +
+        "”\n\n" +
 
-        "🔮  Mysterious ने आपका प्रश्न प्राप्त कर लिया है।\n\n" +
+        "🔮 MYSTERIOUS ने आपका प्रश्न प्राप्त कर लिया है।\n\n" +
 
-        "यह अभी  Mysterious का पहला prototype है। " +
-        "अगले चरण में इसी search system को सुरक्षित AI + Live Web Knowledge से connect किया जाएगा, " +
-        "जिससे वास्तविक जानकारी प्राप्त की जा सकेगी।";
+        "यह अभी MYSTERIOUS का front-end version है। " +
+
+        "अगले चरण में इसे secure AI और Live Web Search से connect किया जाएगा, " +
+
+        "जिससे आपके प्रश्न का वास्तविक और current answer प्राप्त किया जा सकेगा।";
 
     resultArea.scrollIntoView({
         behavior:"smooth"
@@ -1191,23 +1388,23 @@ function searchRahsmi(){
 }
 
 
-/* =================================
-   CATEGORY SEARCH
-================================= */
+/* =====================================
+   CATEGORY
+===================================== */
 
 function setSearch(text){
 
     document.getElementById("searchInput")
         .value = text;
 
-    searchRahsmi();
+    searchMysterious();
 
 }
 
 
-/* =================================
+/* =====================================
    VOICE SEARCH
-================================= */
+===================================== */
 
 function voiceSearch(){
 
@@ -1232,31 +1429,51 @@ function voiceSearch(){
 
     recognition.interimResults = false;
 
+    recognition.maxAlternatives = 1;
+
     recognition.start();
 
-    recognition.onresult = function(event){
 
-        const text =
-            event.results[0][0].transcript;
+    recognition.onresult =
+        function(event){
 
-        document.getElementById("searchInput")
-            .value = text;
+            const text =
+                event.results[0][0].transcript;
 
-        searchRahsmi();
+            document.getElementById("searchInput")
+                .value = text;
 
-    };
+            searchMysterious();
+
+        };
+
+
+    recognition.onerror =
+        function(){
+
+            console.log(
+                "Voice recognition error"
+            );
+
+        };
 
 }
 
 
-/* =================================
+/* =====================================
    EXIT
-================================= */
+===================================== */
 
-function goBack(){
+function exitMysterious(){
 
     document.getElementById("secretRoom")
         .style.display = "none";
+
+    document.getElementById("resultArea")
+        .style.display = "none";
+
+    document.getElementById("searchInput")
+        .value = "";
 
     document.getElementById("introScreen")
         .style.display = "flex";
@@ -1264,9 +1481,9 @@ function goBack(){
 }
 
 
-/* =================================
-   SECURITY
-================================= */
+/* =====================================
+   HTML SECURITY
+===================================== */
 
 function escapeHTML(text){
 
